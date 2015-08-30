@@ -1,2 +1,2 @@
 # GitHubAPI
-ASP.net MVP application for connect with the Github API
+ASP.net MVC application for connect with the Github API
