@@ -10,14 +10,17 @@ namespace Way2Teste02.Controllers
     public class HomeController : Controller
     {
         
-        private static List<GitHubRepository> _gitHubRepositories; 
+        private static List<GitHubRepository> _gitHubRepositories;
+        private static GitHubApiCalls _gitHubApiCalls;
+
         public ActionResult Index()
         {
-            GitHubApiCalls gitHubApiCalls = new GitHubApiCalls();
+            
+            _gitHubApiCalls = new GitHubApiCalls();
             //-----------------------
             //Aqui é chamado a classe que retorna uma coleção de objeto do tipo repositorio. 
             //-----------------------
-            _gitHubRepositories = gitHubApiCalls.GetUserRepos("luisfernandomoraes");
+            _gitHubRepositories = _gitHubApiCalls.GetUserRepos("luisfernandomoraes");
             
             return View(_gitHubRepositories);
         }
@@ -36,6 +39,12 @@ namespace Way2Teste02.Controllers
         {
             var repository = _gitHubRepositories.First(githubRepository => githubRepository.Id == idRepository);
             return View(repository);
+        }
+
+        public ActionResult Search(string query)
+        {
+                       
+            return View(_gitHubRepositories);
         }
     }
 }

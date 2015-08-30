@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using ServiceStack;
 
 namespace Way2Teste02.Models
 {
     public class GitHubApiCalls
     {
-        public const string GithubApiBaseUrl = "https://api.github.com/";
+        private const string GithubApiBaseUrl = "https://api.github.com/";
 
-        public T GetJson<T>(string route, params object[] routeArgs)
+        private T GetJson<T>(string route, params object[] routeArgs)
         {
             return GithubApiBaseUrl.AppendPath(route.Fmt(routeArgs))
                 .GetJsonFromUrl()
@@ -22,9 +20,9 @@ namespace Way2Teste02.Models
             return GetJson<List<GitHubRepository>>("users/{0}/repos", gitHubUsername);
         }
 
-        public List<GitHubRepository> GetOrgRepos(string GitHubOrgName)
+        public List<GitHubRepository> GetOrgRepos(string gitHubOrgName)
         {
-            return GetJson<List<GitHubRepository>>("orgs/{0}/repos", GitHubOrgName);
+            return GetJson<List<GitHubRepository>>("orgs/{0}/repos", gitHubOrgName);
         }
 
         public GitHubRepository GetUserRepo(string gitHubUsername, string projectName)
@@ -57,9 +55,9 @@ namespace Way2Teste02.Models
             return GetJson<List<GitHubUser>>("users/{0}/followers", gitHubUsername);
         }
 
-        public List<GitHubUser> GetOrgMembers(string GitHubOrgName)
+        public List<GitHubUser> GetOrgMembers(string gitHubOrgName)
         {
-            return GetJson<List<GitHubUser>>("orgs/{0}/members", GitHubOrgName);
+            return GetJson<List<GitHubUser>>("orgs/{0}/members", gitHubOrgName);
         }
 
         public List<GitHubRepository> GetAllUserAndOrgsReposFor(string gitHubUsername)
