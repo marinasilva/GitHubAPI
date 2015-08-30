@@ -1,15 +1,23 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using Way2Teste02.Models
+@model IEnumerable<Way2Teste02.Models.GitHubRepository>
+@{
+    ViewBag.Title = "Meus Repositórios";
 }
 
 
 <div class="jumbotron">
-    <h1>Meus Repositórios</h1>
-    <p class="lead">Lista todos os repositórios do usuário</p>
-    <ul>
-        <li><a href="/Home/Details">Repositório Teste01</a></li>
-        <li><a href="/Home/Details">Repositório Teste02</a></li>
-        <li><a href="/Home/Details">Repositório Teste03</a></li>
-        <li><a href="/Home/Details">Repositório Teste04</a></li>
-    </ul>
+    <h2>Meus Repositórios</h2>
+    <div class="list-group">
+        <a href="#" class="list-group-item active">
+            Repositório
+        </a>
+        @foreach (var repository in Model)
+        {
+            @Html.ActionLink(@repository.Name, "Details", new {idRepository = @repository.Id})<br/>
+        }
+        @*<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+        <a href="#" class="list-group-item">Morbi leo risus</a>
+        <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+        <a href="#" class="list-group-item">Vestibulum at eros</a>*@
+    </div>
 </div>

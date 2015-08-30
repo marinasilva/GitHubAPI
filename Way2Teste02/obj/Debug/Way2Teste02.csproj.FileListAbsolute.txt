@@ -67,9 +67,6 @@ c:\users\marina\documents\visual studio 2015\Projects\Way2Teste02\Way2Teste02\bi
 c:\users\marina\documents\visual studio 2015\Projects\Way2Teste02\Way2Teste02\obj\Debug\Way2Teste02.csprojResolveAssemblyReference.cache
 c:\users\marina\documents\visual studio 2015\Projects\Way2Teste02\Way2Teste02\obj\Debug\Way2Teste02.dll
 c:\users\marina\documents\visual studio 2015\Projects\Way2Teste02\Way2Teste02\obj\Debug\Way2Teste02.pdb
-C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\obj\Debug\Way2Teste02.csprojResolveAssemblyReference.cache
-C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\obj\Debug\Way2Teste02.dll
-C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\obj\Debug\Way2Teste02.pdb
 C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\bin\roslyn\csc.exe
 C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -137,3 +134,6 @@ C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\bin\Microsoft.Owin
 C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\obj\Debug\Way2Teste02.dll
+C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\obj\Debug\Way2Teste02.pdb
+C:\Users\LuísFernando\Documents\GitHub\GitHubAPI\Way2Teste02\obj\Debug\Way2Teste02.csprojResolveAssemblyReference.cache

@@ -1,15 +1,17 @@
-﻿
+﻿@model Way2Teste02.Models.GitHubRepository
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes do Repositorio";
 }
 
 <div class="jumbotron">
-    <h1>Detalhes - Repositório Teste01</h1>
-    <p>Autor: </p>
-    <p>Linguagem: </p>
-    <p>Descrição: </p>
-    <p>Última atualização: </p>
-    <p>Contribuidores: </p>
+
+    <h1>Detalhes - Repositório @Model.Name</h1>
+    <p>Autor: @Model.Owner.Name</p>
+    <p>Bio do Autor: @Model.Owner.Bio</p>
+    <p>Linguagem: @Model.Language</p>
+    <p>Descrição: @Model.Description</p>
+    <p>Última atualização: @Model.UpdatedAt</p>
+    <p>Contribuidores: @Model.Watchers</p>
     <ul>
         <li>Autor 01</li>
         <li>Autor 02</li>

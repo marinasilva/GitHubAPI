@@ -1,15 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Web;
-using System.Xml.Serialization;
-using Newtonsoft.Json;
 using ServiceStack;
 
 namespace Way2Teste02.Models
@@ -27,7 +17,7 @@ namespace Way2Teste02.Models
             foreach (var uriComponent in uriComponents)
             {
                 if (i++ > 0) sb.Append('/');
-                sb.Append(uriComponent.UrlEncode());
+                sb.Append(uriComponent);
             }
             return sb.ToString();
         }

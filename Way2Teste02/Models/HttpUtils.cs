@@ -25,35 +25,9 @@ namespace Way2Teste02.Models
             Action<HttpWebRequest> requestFilter = null, Action<HttpWebResponse> responseFilter = null)
         {
             var webReq = (HttpWebRequest)WebRequest.Create(url);
-            webReq.ProtocolVersion = HttpVersion.Version10;
-            if (method != null)
-                webReq.Method = method;
-            if (contentType != null)
-                webReq.ContentType = contentType;
-
-            webReq.Accept = accept;
-            PclExport.Instance.AddCompression(webReq);
-
-            if (requestFilter != null)
-            {
-                requestFilter(webReq);
-            }
-
-            if (ResultsFilter != null)
-            {
-                return ResultsFilter.GetString(webReq);
-            }
-
-            if (requestBody != null)
-            {
-                using (var reqStream = PclExport.Instance.GetRequestStream(webReq))
-                using (var writer = new StreamWriter(reqStream))
-                {
-                    writer.Write(requestBody);
-                }
-            }
-
-            using (var webRes = PclExport.Instance.GetResponse(webReq))
+            AddHeaders(ref webReq);
+            
+            using (var webRes = webReq.GetResponse())
             using (var stream = webRes.GetResponseStream())
             using (var reader = new StreamReader(stream))
             {
@@ -62,6 +36,40 @@ namespace Way2Teste02.Models
                     responseFilter((HttpWebResponse)webRes);
                 }
                 return reader.ReadToEnd();
+            }
+        }
+        private static void AddHeaders(ref HttpWebRequest request)
+        {
+            try
+            {
+                request.ContentLength = 0;
+                request.ContentType = "text/json";
+                //request.ContentLength = request.ContentType.Length;
+                request.Accept = "*/*";
+                request.Headers.Add(HttpRequestHeader.AcceptLanguage, "en-us");
+                request.UserAgent =
+                   "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0;" +
+                   ".NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; InfoPath.2;" +
+                   ".NET CLR 3.5.21022; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E)";
+                //request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+                request.UseDefaultCredentials = true;
+                request.PreAuthenticate = true;
+                request.AllowAutoRedirect = false;
+            }
+            catch (WebException e)
+            {
+                Console.WriteLine("\nMain Exception raised!");
+                Console.WriteLine("\nMessage:{0}", e.Message);
+                Console.WriteLine("\nStatus:{0}", e.Status);
+                Console.WriteLine("Press any key to continue..........");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("\nMain Exception raised!");
+                Console.WriteLine("Source :{0} ", e.Source);
+                Console.WriteLine("Message :{0} ", e.Message);
+                Console.WriteLine("Press any key to continue..........");
+                Console.Read();
             }
         }
     }
