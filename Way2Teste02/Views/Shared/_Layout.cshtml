@@ -34,7 +34,7 @@
         <form class="navbar-form form-horizontal navbar-right" method="get" action="@(Url.Action("Search", "Home"))">
             <div class="has-feedback">
                 <i class="glyphicon glyphicon-search form-control-feedback"></i>
-                <input type="search" class="form-control" name="q" required placeholder="Pesquisar no GitHub" maxlength="50" value="@(ViewBag.Search)" />
+                <input type="search" class="form-control" name="query" required placeholder="Pesquisar no GitHub" maxlength="50" value="@(ViewBag.Search)" />
             </div>
         </form>
         @RenderBody()

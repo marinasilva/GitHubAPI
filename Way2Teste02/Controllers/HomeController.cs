@@ -43,8 +43,8 @@ namespace Way2Teste02.Controllers
 
         public ActionResult Search(string query)
         {
-                       
-            return View(_gitHubRepositories);
+            var list = _gitHubApiCalls.SearchGitHubRepositories(query);
+            return View(list);
         }
     }
 }

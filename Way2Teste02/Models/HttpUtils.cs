@@ -31,6 +31,7 @@ namespace Way2Teste02.Models
             using (var stream = webRes.GetResponseStream())
             using (var reader = new StreamReader(stream))
             {
+                reader.BaseStream.ReadTimeout = Int32.MaxValue;
                 if (responseFilter != null)
                 {
                     responseFilter((HttpWebResponse)webRes);
@@ -44,6 +45,7 @@ namespace Way2Teste02.Models
             {
                 request.ContentLength = 0;
                 request.ContentType = "text/json";
+                request.Accept = "application/vnd.github.v3+json";
                 //request.ContentLength = request.ContentType.Length;
                 request.Accept = "*/*";
                 request.Headers.Add(HttpRequestHeader.AcceptLanguage, "en-us");

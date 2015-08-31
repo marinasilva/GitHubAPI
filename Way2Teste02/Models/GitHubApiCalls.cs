@@ -20,6 +20,11 @@ namespace Way2Teste02.Models
             return GetJson<List<GitHubRepository>>("users/{0}/repos", gitHubUsername);
         }
 
+        public List<GitHubRepository> SearchGitHubRepositories(string query)
+        {
+            return GetJson<List<GitHubRepository>>("search/repositories?q={0}",query);
+        } 
+
         public List<GitHubRepository> GetOrgRepos(string gitHubOrgName)
         {
             return GetJson<List<GitHubRepository>>("orgs/{0}/repos", gitHubOrgName);
