@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using ServiceStack;
 
@@ -12,33 +15,60 @@ namespace Way2Teste02.Models
     {
         [ThreadStatic]
         public static IHttpResultsFilter ResultsFilter;
-        public static string GetJsonFromUrl(this string url, Action<HttpWebRequest> requestFilter = null, Action<HttpWebResponse> responseFilter = null)
+        public static string GetJsonFromUrl(this string url, Action<HttpWebRequest> requestFilter = null, Action<HttpWebResponse> responseFilter = null,string urlParameters = null)
         {
-            return url.GetStringFromUrl("text/json", requestFilter, responseFilter);
-        }
-        public static string GetStringFromUrl(this string url, string accept = "*/*", Action<HttpWebRequest> requestFilter = null, Action<HttpWebResponse> responseFilter = null)
-        {
-            return SendStringToUrl(url, accept: accept, requestFilter: requestFilter, responseFilter: responseFilter);
-        }
+            if(urlParameters != null) return url.GetStringFromUrl("text/json", requestFilter, responseFilter,urlParameters:urlParameters);
+            else return url.GetStringFromUrl("text/json", requestFilter, responseFilter);
 
+        }
+        public static string GetStringFromUrl(this string url, string accept = "*/*", Action<HttpWebRequest> requestFilter = null, Action<HttpWebResponse> responseFilter = null,string urlParameters = null)
+        {
+            if (urlParameters != null) return SendStringToUrl(url, urlParameters);
+            return SendStringToUrl(url, accept: accept, requestFilter: requestFilter, responseFilter: responseFilter);
+             
+        }
         public static string SendStringToUrl(this string url, string method = null,
             string requestBody = null, string contentType = null, string accept = "*/*",
             Action<HttpWebRequest> requestFilter = null, Action<HttpWebResponse> responseFilter = null)
         {
             var webReq = (HttpWebRequest)WebRequest.Create(url);
+            webReq.Method = WebRequestMethods.Http.Get;
+            webReq.ContentLength = Int32.MaxValue;
             AddHeaders(ref webReq);
-            
+           
+
             using (var webRes = webReq.GetResponse())
-            using (var stream = webRes.GetResponseStream())
-            using (var reader = new StreamReader(stream))
             {
-                reader.BaseStream.ReadTimeout = Int32.MaxValue;
-                if (responseFilter != null)
+                using (var stream = webRes.GetResponseStream())
+                using (var reader = new StreamReader(stream))
                 {
-                    responseFilter((HttpWebResponse)webRes);
+                    if (responseFilter != null)
+                    {
+                        responseFilter((HttpWebResponse) webRes);
+                    }
+                    return reader.ReadToEnd();
                 }
-                return reader.ReadToEnd();
             }
+        }
+        public static string SendStringToUrl(this string url,string parameters)
+        {
+            //-----------------------------
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://api.github.com/");
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml");
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate");
+            client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Charset", "ISO-8859-1");
+
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            var result = client.GetAsync("search/repositories?q=malwares")
+                    .Result.Content.ReadAsStringAsync()
+                    .ConfigureAwait(false);
+            return response.Content.ReadAsStringAsync().ToString();
+            //------------------------------
         }
 
         private static void AddHeaders(ref HttpWebRequest request)
@@ -46,7 +76,7 @@ namespace Way2Teste02.Models
             try
             {
                 request.ContentLength = 0;
-                request.ContentType = "text/json";
+                request.ContentType = "application/json";
                 request.Accept = "application/vnd.github.v3+json";
                 //request.ContentLength = request.ContentType.Length;
                 request.Accept = "*/*";
@@ -76,5 +106,6 @@ namespace Way2Teste02.Models
                 Console.Read();
             }
         }
+
     }
 }
