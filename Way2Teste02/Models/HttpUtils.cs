@@ -20,6 +20,7 @@ namespace Way2Teste02.Models
         {
             return SendStringToUrl(url, accept: accept, requestFilter: requestFilter, responseFilter: responseFilter);
         }
+
         public static string SendStringToUrl(this string url, string method = null,
             string requestBody = null, string contentType = null, string accept = "*/*",
             Action<HttpWebRequest> requestFilter = null, Action<HttpWebResponse> responseFilter = null)
@@ -39,6 +40,7 @@ namespace Way2Teste02.Models
                 return reader.ReadToEnd();
             }
         }
+
         private static void AddHeaders(ref HttpWebRequest request)
         {
             try

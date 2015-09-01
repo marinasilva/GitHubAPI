@@ -35,14 +35,14 @@ namespace Way2Teste02.Models
             return GetJson<GitHubRepository>("repos/{0}/{1}", gitHubUsername, projectName);
         }
 
-        public List<GitHubUser> GetUserRepoContributors(string gitHubUsername, string projectName)
+        public List<GithubUser> GetUserRepoContributors(string gitHubUsername, string projectName)
         {
-            return GetJson<List<GitHubUser>>("repos/{0}/{1}/contributors", gitHubUsername, projectName);
+            return GetJson<List<GithubUser>>("repos/{0}/{1}/contributors", gitHubUsername, projectName);
         }
 
-        public List<GitHubUser> GetUserRepoWatchers(string gitHubUsername, string projectName)
+        public List<GithubUser> GetUserRepoWatchers(string gitHubUsername, string projectName)
         {
-            return GetJson<List<GitHubUser>>("repos/{0}/{1}/watchers", gitHubUsername, projectName);
+            return GetJson<List<GithubUser>>("repos/{0}/{1}/watchers", gitHubUsername, projectName);
         }
 
         public List<GitHubRepository> GetReposUserIsWatching(string gitHubUsername)
@@ -55,14 +55,14 @@ namespace Way2Teste02.Models
             return GetJson<List<GitHubOrg>>("users/{0}/orgs", gitHubUsername);
         }
 
-        public List<GitHubUser> GetUserFollowers(string gitHubUsername)
+        public List<GithubUser> GetUserFollowers(string gitHubUsername)
         {
-            return GetJson<List<GitHubUser>>("users/{0}/followers", gitHubUsername);
+            return GetJson<List<GithubUser>>("users/{0}/followers", gitHubUsername);
         }
 
-        public List<GitHubUser> GetOrgMembers(string gitHubOrgName)
+        public List<GithubUser> GetOrgMembers(string gitHubOrgName)
         {
-            return GetJson<List<GitHubUser>>("orgs/{0}/members", gitHubOrgName);
+            return GetJson<List<GithubUser>>("orgs/{0}/members", gitHubOrgName);
         }
 
         public List<GitHubRepository> GetAllUserAndOrgsReposFor(string gitHubUsername)

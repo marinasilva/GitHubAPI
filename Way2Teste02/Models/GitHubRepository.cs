@@ -29,7 +29,7 @@ namespace Way2Teste02.Models
         public bool Private { get; set; }
         public DateTime CreatedAt { get; set; }
         public bool HasWiki { get; set; }
-        public GitHubUser Owner { get; set; }
+        public GithubUser Owner { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }
