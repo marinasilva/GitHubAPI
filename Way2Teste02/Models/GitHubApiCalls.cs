@@ -10,6 +10,11 @@ namespace Way2Teste02.Models
 
         private T GetJson<T>(string route, params object[] routeArgs)
         {
+            if (route.Contains("?q="))
+                return GithubApiBaseUrl.AppendPath(route.Fmt(routeArgs))
+                    .GetJsonFromUrl(urlParameters: routeArgs[0].ToString())
+                    .FromJson<T>();
+
             return GithubApiBaseUrl.AppendPath(route.Fmt(routeArgs))
                 .GetJsonFromUrl()
                 .FromJson<T>();
@@ -22,8 +27,8 @@ namespace Way2Teste02.Models
 
         public List<GitHubRepository> SearchGitHubRepositories(string query)
         {
-            return GetJson<List<GitHubRepository>>("search/repositories?q={0}",query);
-        } 
+            return GetJson<List<GitHubRepository>>("search/repositories?q={0}", query);
+        }
 
         public List<GitHubRepository> GetOrgRepos(string gitHubOrgName)
         {
